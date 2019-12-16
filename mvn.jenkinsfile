@@ -1,0 +1,28 @@
+pipeline{
+    agent any {
+
+    }
+    stages{
+        stage('check-out'){
+            steps{
+                 git credentialsId: 'git-github', url: 'https://github.com/avinashkavi447/application.git'
+                 
+            }
+        }
+        stage('validate'){
+            steps{
+                sh '''
+                   mvn validate
+
+                 '''
+
+            }
+        }
+        stage('compile'){
+            steps{
+                 sh '''
+                    mvn compile
+                 '''
+            }
+       }
+    }   
